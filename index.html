@@ -1,0 +1,132 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+  <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+
+  <!-- Add your site or application content here -->
+  <p>Hello world! This is HTML5 Boilerplate.</p>
+  <script src="js/vendor/modernizr-3.7.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
+  <script src="js/plugins.js"></script>
+  <script src="js/main.js"></script>
+
+  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+  <script>
+    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')
+  </script>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.7/p5.js"></script>
+
+    <script>
+
+      function preload() {
+        //noprotect
+        img = loadImage("https://raw.githubusercontent.com/scikit-image/scikit-image/master/skimage/data/astronaut.png");
+        img_r = loadImage("https://raw.githubusercontent.com/scikit-image/scikit-image/master/skimage/data/astronaut.png");
+        img_g = loadImage("https://raw.githubusercontent.com/scikit-image/scikit-image/master/skimage/data/astronaut.png");
+        img_b = loadImage("https://raw.githubusercontent.com/scikit-image/scikit-image/master/skimage/data/astronaut.png");
+      }
+    function setup() {
+      //noprotect
+      createCanvas(512,512);
+      img.resize(256,256);
+      img_r.resize(256,256);
+      img_g.resize(256,256);
+      img_b.resize(256,256);
+
+     // image(img, 0, 0);
+
+     // img_r=createImage(256,256);
+     // img_g=createImage(256,256);
+     // img_b=createImage(256,256);
+
+      //img_b = img;
+      //img_g = img;
+      //img_r = img;
+
+      img_r.loadPixels();
+
+
+      for(x=0;x<img_r.width;x++) {
+        for (y = 0; y < img_r.height; y++) {
+          pos = 4 * (y * img_r.width + x);
+          //img_r.pixels[pos] = 255;  //to jest wartość dla R
+          img_r.pixels[pos + 1] = 0; //= 100; //to jest wartość dla G
+          img_r.pixels[pos + 2] = 0;//= 100; //to jest wartość dla B
+          img_r.pixels[pos + 3] = 255; //to jest wartość dla A
+
+        }
+      }
+      img_r.updatePixels();
+
+
+      img_g.loadPixels();
+      for(x=0;x<img_g.width;x++) {
+        for (y = 0; y < img_g.height; y++) {
+          pos = 4 * (y * img_g.width + x);
+
+          img_g.pixels[pos] = 0; //to jest wartość dla R
+          //img_g.pixels[pos+1] = 255; //to jest wartość dla G
+          img_g.pixels[pos + 2] = 0; //= 100; //to jest wartość dla B
+          img_g.pixels[pos + 3] = 255; //to jest wartość dla A
+        }}
+      img_g.updatePixels();
+
+
+
+      img_b.loadPixels();
+      for(x=0;x<img_b.width;x++) {
+        for (y = 0; y < img_b.height; y++) {
+          pos = 4 * (y * img_b.width + x);
+          img_b.pixels[pos] = 0; //to jest wartość dla R
+          img_b.pixels[pos + 1] = 0; //to jest wartość dla G
+          //img_b.pixels[pos+2] = 255; //to jest wartość dla B
+          img_b.pixels[pos+3] = 255; //to jest wartość dla A
+
+        }}
+      img_b.updatePixels();
+
+      image(img_b, 0, 256);
+      image(img_r, 0, 0);
+      image(img_g, 256, 0);
+
+      img_sum=createImage(256,256);
+      img_sum.blend(img_r,0,0,256,256,0,0,256,256,ADD);
+      img_sum.blend(img_g,0,0,256,256,0,0,256,256,ADD);
+      img_sum.blend(img_b,0,0,256,256,0,0,256,256,ADD);
+
+      image(img_sum, 256, 256);
+
+   //img.updatePixels();
+
+
+
+    }
+
+  </script>
+
+  <script src="https://www.google-analytics.com/analytics.js" async></script>
+</body>
+
+</html>
